@@ -1,4 +1,4 @@
-package com.mobi.order.MobiOrderService;
+package com.mobi.order.mobiOrderService;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
