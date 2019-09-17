@@ -1,16 +1,23 @@
 package com.mobi.order.mobiOrderService.entities;
 
-import javax.persistence.Entity;
+import lombok.Data;
+
+import javax.persistence.*;
 import java.util.Date;
+import java.util.Map;
 
 @Entity
+@Data
 public class OrderDetails {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="order_id")
+    private Long orderId;
+    @Column(name="order_status")
+    private String orderStatus;
+    @Column(name="order_time")
+    private Date orderTime;
 
-    Long id;
-    Long orderId;
-    String orderStatus;
-    Date orderTime;
-
-
-
+    @ElementCollection
+    private Map<String, Integer> productQtyMap;
 }
