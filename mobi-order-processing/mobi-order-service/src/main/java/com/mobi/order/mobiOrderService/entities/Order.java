@@ -8,7 +8,7 @@ import java.util.Map;
 
 @Entity
 @Data
-public class OrderDetails {
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="order_id")

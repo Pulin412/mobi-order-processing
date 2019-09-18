@@ -1,7 +1,7 @@
 package com.mobi.order.mobiOrderService.controller;
 
-import com.mobi.order.mobiOrderService.entities.OrderDetails;
-import com.mobi.order.mobiOrderService.models.PlaceOrderReqDto;
+import com.mobi.order.mobiOrderService.entities.Order;
+import com.mobi.order.mobiOrderService.models.RequestDto;
 import com.mobi.order.mobiOrderService.repository.OrderRepository;
 import com.mobi.order.mobiOrderService.services.impl.OrderServiceImpl;
 
@@ -16,6 +16,8 @@ import java.util.Map;
 @RestController
 public class OrderServiceController {
 
+    RequestDto requestDto;
+
     @Autowired
     private OrderServiceImpl orderServiceImpl;
 
@@ -24,7 +26,7 @@ public class OrderServiceController {
 
     @GetMapping("/test")
     public String testMessage() {
-        OrderDetails o1 = new OrderDetails();
+        Order o1 = new Order();
         o1.setOrderStatus("complete");
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
@@ -38,13 +40,13 @@ public class OrderServiceController {
     }
 
     @RequestMapping("/getOrder/{orderId}")
-    public OrderDetails getOrder(@PathVariable Long orderId) {
+    public Order getOrder(@PathVariable Long orderId) {
         return orderServiceImpl.getOrder(orderId);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/placeOrder")
-    public Long placeOrder(PlaceOrderReqDto placeOrderReqDto) {
-        return orderServiceImpl.placeOrder(placeOrderReqDto);
+    public Long placeOrder(RequestDto requestDto) {
+        return orderServiceImpl.placeOrder(requestDto);
     }
 
     @RequestMapping("/getOrderStatus/{orderId}")

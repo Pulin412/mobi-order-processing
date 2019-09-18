@@ -1,7 +1,7 @@
 package com.mobi.order.mobiOrderService.services.impl;
 
-import com.mobi.order.mobiOrderService.entities.OrderDetails;
-import com.mobi.order.mobiOrderService.models.PlaceOrderReqDto;
+import com.mobi.order.mobiOrderService.entities.Order;
+import com.mobi.order.mobiOrderService.models.RequestDto;
 import com.mobi.order.mobiOrderService.repository.OrderRepository;
 //import com.mobi.order.mobiOrderService.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,15 +13,13 @@ public class OrderServiceImpl {
     @Autowired
     OrderRepository orderRepository;
 
-    PlaceOrderReqDto placeOrderReqDto;
-
 //    @Override
-    public OrderDetails getOrder(Long orderId) {
+    public Order getOrder(Long orderId) {
         return orderRepository.findByOrderId(orderId);
     }
 
 //    @Override
-    public Long placeOrder(PlaceOrderReqDto placeOrderReqDto) {
+    public Long placeOrder(RequestDto requestDto) {
         return null;
     }
 
