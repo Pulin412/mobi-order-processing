@@ -13,6 +13,8 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="order_id")
     private Long orderId;
+    @Column(name="customer_Id")
+    private Long customerId;
     @Column(name="order_status")
     private String orderStatus;
     @Column(name="order_time")

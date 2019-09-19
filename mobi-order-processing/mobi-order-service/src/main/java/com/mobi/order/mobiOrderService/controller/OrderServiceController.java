@@ -1,14 +1,13 @@
 package com.mobi.order.mobiOrderService.controller;
 
 import com.mobi.order.mobiOrderService.entities.Order;
-import com.mobi.order.mobiOrderService.models.RequestDto;
+import com.mobi.order.mobiOrderService.dto.OrderDto;
 import com.mobi.order.mobiOrderService.repository.OrderRepository;
-import com.mobi.order.mobiOrderService.services.impl.OrderServiceImpl;
+import com.mobi.order.mobiOrderService.services.OrderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,10 +15,10 @@ import java.util.Map;
 @RestController
 public class OrderServiceController {
 
-    RequestDto requestDto;
+    OrderDto orderDto;
 
     @Autowired
-    private OrderServiceImpl orderServiceImpl;
+    private OrderService orderService;
 
     @Autowired
     private OrderRepository orderRepository;
@@ -28,7 +27,6 @@ public class OrderServiceController {
     public String testMessage() {
         Order o1 = new Order();
         o1.setOrderStatus("complete");
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
         o1.setOrderTime(date);
         Map<String, Integer> map = new HashMap<>();
@@ -39,18 +37,18 @@ public class OrderServiceController {
         return "Added successfully";
     }
 
-    @RequestMapping("/getOrder/{orderId}")
+    @RequestMapping("/{orderId}")
     public Order getOrder(@PathVariable Long orderId) {
-        return orderServiceImpl.getOrder(orderId);
+        return orderService.getOrder(orderId);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/placeOrder")
-    public Long placeOrder(RequestDto requestDto) {
-        return orderServiceImpl.placeOrder(requestDto);
+    public Long placeOrder(OrderDto orderDto) {
+        return orderService.placeOrder(orderDto);
     }
 
     @RequestMapping("/getOrderStatus/{orderId}")
     public String getOrderStatus(@PathVariable Long orderId) {
-        return orderServiceImpl.getOrderStatus(orderId);
+        return orderService.getOrderStatus(orderId);
     }
 }
