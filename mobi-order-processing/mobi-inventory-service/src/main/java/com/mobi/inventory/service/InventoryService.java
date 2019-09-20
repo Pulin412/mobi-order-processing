@@ -4,7 +4,6 @@ import com.mobi.inventory.dto.ProductDto;
 import com.mobi.inventory.dto.ResponseDto;
 import com.mobi.inventory.entity.Product;
 import com.mobi.inventory.repository.InventoryRepository;
-import com.mobi.inventory.utils.Category;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -127,9 +126,16 @@ public class InventoryService {
         Optional<Product> tempProduct = inventoryRepository.findById(convertToEntity(productDto).getProductId());
         ResponseDto responseDto = new ResponseDto("", HttpStatus.OK.toString(), null);
         if (tempProduct.isPresent()) {
-            inventoryRepository.delete(tempProduct.get());
-            inventoryRepository.save(tempProduct.get());
-            productList.add(tempProduct.get());
+            Product product = tempProduct.get();
+            product.setCategory(productDto.getCategory());
+            product.setBasePrice(productDto.getBasePrice());
+            product.setDescription(productDto.getDescription());
+            product.setMrp(productDto.getMrp());
+            product.setName(productDto.getName());
+            product.setTax(productDto.getTax());
+            product.setQuantity(productDto.getQuantity());
+            inventoryRepository.save(product);
+            productList.add(product);
             responseDto.setMessage("Updated the product");
             responseDto.setProductDtoList(productListToProductDtoList(productList));
         } else {
