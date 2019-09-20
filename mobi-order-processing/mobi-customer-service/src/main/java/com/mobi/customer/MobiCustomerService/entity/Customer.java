@@ -1,59 +1,35 @@
 package com.mobi.customer.MobiCustomerService.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.extern.log4j.Log4j;
+
 import javax.persistence.*;
 
+@Getter
+@Setter
+@ToString
+@Log4j
 @Entity
-@Table(name="CUSTOMER")
+@Table(name = "CUSTOMER")
 public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    @Column(name="first_name")
-    private String firstName;
-    
-    @Column(name="last_name")
-    private String lastName;
-    
-    @Column(name="email", nullable=false, length=200)
+
+    @Column(name = "customer_name")
+    private String customerName;
+
+    @Column(name = "customer_address", nullable = false, length = 200)
+    private String address;
+
+    @Column(name = "email", nullable = false, length = 50)
     private String email;
-    
-    public Long getId() {
-		return id;
-	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @Column(name = "contact_details", nullable = false, length = 15)
+    private Long contact;
 
-	public String getFirstName() {
-		return firstName;
-	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-    @Override
-    public String toString() {
-        return "EmployeeEntity [id=" + id + ", firstName=" + firstName + 
-                ", lastName=" + lastName + ", email=" + email   + "]";
-    }
 }
