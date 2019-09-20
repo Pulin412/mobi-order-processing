@@ -38,7 +38,7 @@ public class OrderServiceController {
     }
 
     @RequestMapping("/{orderId}")
-    public Order getOrder(@PathVariable Long orderId) {
+    publc ResponseDto getOrder(@PathVariable Long orderId) {
         return orderService.getOrder(orderId);
     }
 

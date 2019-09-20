@@ -1,5 +1,6 @@
 package com.mobi.order.mobiOrderService.entities;
 
+import com.mobi.inventory.entity.Product;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -21,5 +22,5 @@ public class Order {
     private Date orderTime;
 
     @ElementCollection
-    private Map<String, Integer> productQtyMap;
+    private Map<Product, Integer> productQtyMap;
 }
