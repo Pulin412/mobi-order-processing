@@ -4,7 +4,6 @@ import com.mobi.inventory.dto.ProductDto;
 import com.mobi.inventory.dto.ResponseDto;
 import com.mobi.inventory.entity.Product;
 import com.mobi.inventory.repository.InventoryRepository;
-import com.mobi.inventory.utils.Category;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Inventory service.
+ */
 @Service
 public class InventoryService {
 
@@ -23,88 +25,123 @@ public class InventoryService {
     @Autowired
     private ModelMapper modelMapper;
 
+    /**
+     * Gets product by id.
+     *
+     * @param productId the product id
+     * @return the product by id
+     */
     public ResponseDto getProductById(String productId) {
         Optional<Product> product = inventoryRepository.findById(Long.valueOf(productId));
+        ResponseDto responseDto = new ResponseDto("", HttpStatus.OK.toString(), null);
         if (product.isPresent()) {
             List<Product> productList = new ArrayList<>();
             productList.add(product.get());
-            return new ResponseDto("Product found", HttpStatus.OK.toString(), productListToProductDtoList(productList));
+            responseDto.setMessage("Product Found");
+            responseDto.setProductDtoList(productListToProductDtoList(productList));
         } else {
-            return new ResponseDto("Product not found", HttpStatus.OK.toString(), null);
+            responseDto.setMessage("Product not found");
         }
+        return responseDto;
     }
 
+    /**
+     * Gets product by name.
+     *
+     * @param name the name
+     * @return the product by name
+     */
     public ResponseDto getProductByName(String name) {
         List<Product> productList = inventoryRepository.findByName(name);
+        ResponseDto responseDto = new ResponseDto("", HttpStatus.OK.toString(), null);
         if (productList.isEmpty()) {
-            return new ResponseDto("Product not found", HttpStatus.OK.toString(), null);
+            responseDto.setMessage("Product not found");
         } else {
-            return new ResponseDto("Found the product", HttpStatus.OK.toString(), productListToProductDtoList(productList));
+            responseDto.setMessage("Product found");
+            responseDto.setProductDtoList(productListToProductDtoList(productList));
         }
+        return responseDto;
     }
 
-    public ResponseDto addProduct(ProductDto productDto) {
-        Product product = convertToEntity(productDto);
-        product.setCategory(Category.valueOf(product.getCategory()).getKey());
-        Product save = inventoryRepository.save(product);
-        List<Product> productList = new ArrayList<>();
-        productList.add(save);
-        return new ResponseDto("Added the product", HttpStatus.OK.toString(), productListToProductDtoList(productList));
-
-    }
-
+    /**
+     * Gets all products.
+     *
+     * @return the all products
+     */
     public ResponseDto getAllProducts() {
         List<Product> productList = inventoryRepository.findAll();
         return new ResponseDto("All products", HttpStatus.OK.toString(), productListToProductDtoList(productList));
     }
 
+    /**
+     * Add list of products response dto.
+     *
+     * @param productDtoList the product dto list
+     * @return the response dto
+     */
     public ResponseDto addListOfProducts(List<ProductDto> productDtoList) {
         List<Product> productList1 = inventoryRepository.saveAll(productDtoListToProductList(productDtoList));
         return new ResponseDto("Added products", HttpStatus.OK.toString(), productListToProductDtoList(productList1));
     }
 
+    /**
+     * Remove product response dto.
+     *
+     * @param id the id
+     * @return the response dto
+     */
     public ResponseDto removeProduct(String id) {
         Optional<Product> product = inventoryRepository.findById(Long.valueOf(id));
+        ResponseDto responseDto = new ResponseDto("", HttpStatus.OK.toString(), null);
         if (product.isPresent()) {
             inventoryRepository.delete(product.get());
             List<ProductDto> productDtoList = new ArrayList<>();
             productDtoList.add(convertToDto(product.get()));
-            return new ResponseDto("Deleted the product successfully", HttpStatus.OK.toString(), productDtoList);
+            responseDto.setMessage("Deleted the product successfully");
+            responseDto.setProductDtoList(productDtoList);
         } else {
-            return new ResponseDto("Product not found", HttpStatus.OK.toString(), null);
+            responseDto.setMessage("Product not found");
         }
+        return responseDto;
     }
 
+    /**
+     * Remove all products response dto.
+     *
+     * @return the response dto
+     */
     public ResponseDto removeAllProducts() {
         inventoryRepository.deleteAll();
         return new ResponseDto("Removed all products successfully", HttpStatus.OK.toString(), null);
     }
 
+    /**
+     * Update product response dto.
+     *
+     * @param productDto the product dto
+     * @return the response dto
+     */
     public ResponseDto updateProduct(ProductDto productDto) {
         List<Product> productList = new ArrayList<>();
         Optional<Product> tempProduct = inventoryRepository.findById(convertToEntity(productDto).getProductId());
+        ResponseDto responseDto = new ResponseDto("", HttpStatus.OK.toString(), null);
         if (tempProduct.isPresent()) {
-            inventoryRepository.delete(tempProduct.get());
-            inventoryRepository.save(tempProduct.get());
-            productList.add(tempProduct.get());
-            return new ResponseDto("Update the product", HttpStatus.OK.toString(), productListToProductDtoList(productList));
+            Product product = tempProduct.get();
+            product.setCategory(productDto.getCategory());
+            product.setBasePrice(productDto.getBasePrice());
+            product.setDescription(productDto.getDescription());
+            product.setMrp(productDto.getMrp());
+            product.setName(productDto.getName());
+            product.setTax(productDto.getTax());
+            product.setQuantity(productDto.getQuantity());
+            inventoryRepository.save(product);
+            productList.add(product);
+            responseDto.setMessage("Updated the product");
+            responseDto.setProductDtoList(productListToProductDtoList(productList));
         } else {
-            return new ResponseDto("Product not found", HttpStatus.OK.toString(), null);
+            responseDto.setMessage("Product not found");
         }
-    }
-
-    public ResponseDto initializeDB() {
-        List<Product> productList = new ArrayList<>();
-        productList.add(new Product("T Shirt", "Cotton shirt", 500.0, 800.0, 15.0, Category.FASHION.getKey()));
-        productList.add(new Product("iphone 11", "Smart phone", 100000.0, 120000.0, 11.0, Category.ELECTRONICS.getKey()));
-        productList.add(new Product("OnePlus 7T", "Smart phone", 50000.0, 56000.0, 4.0, Category.ELECTRONICS.getKey()));
-        productList.add(new Product("Craft Papers", "A4 craft papers", 150000.0, 170000.0, 5.0, Category.ARTS.getKey()));
-        productList.add(new Product("Alienware", "Dell gaming laptop", 500.0, 800.0, 7.0, Category.COMPUTERS.getKey()));
-        productList.add(new Product("T Shirt", "Cotton Shirt", 500.0, 800.0, 15.0, Category.FASHION.getKey()));
-        productList.add(new Product("Protein Powder", "5lb whey protein", 6000.0, 8000.0, 23.0, Category.HEALTH.getKey()));
-        productList.add(new Product("Car cover", "Car protective cover for SUV", 2500.0, 2800.0, 20.0, Category.AUTOMOTIVE.getKey()));
-        addListOfProducts(productListToProductDtoList(productList));
-        return new ResponseDto("Added sample products to DB", HttpStatus.OK.toString(), null);
+        return responseDto;
     }
 
     private List<ProductDto> productListToProductDtoList(List<Product> productList) {
