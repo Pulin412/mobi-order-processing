@@ -12,10 +12,8 @@ public class MobiCustomerServiceApplication {
         SpringApplication.run(MobiCustomerServiceApplication.class, args);
     }
 
-    @Bean
-    public ModelMapper modelMapper() {
-        return new ModelMapper();
-    }
 }
+
+
 
 

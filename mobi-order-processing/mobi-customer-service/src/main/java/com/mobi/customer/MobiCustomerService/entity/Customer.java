@@ -1,16 +1,13 @@
 package com.mobi.customer.MobiCustomerService.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import lombok.extern.log4j.Log4j;
+import lombok.Data;
+
+import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
-@ToString
-@Log4j
+@Data
+@Slf4j
 @Entity
 @Table(name = "CUSTOMER")
 public class Customer {
