@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -35,8 +36,13 @@ public class OrderServiceController {
         return orderService.placeOrder(orderDto);
     }
 
-    @GetMapping("/deleteOrder/{orderId}")
-    public void deleteOrder (@PathVariable Long orderId) {
+    @DeleteMapping("/deleteOrder/{orderId}")
+    public String deleteOrder (@PathVariable Long orderId) {
+       return orderService.deleteOrder(orderId);
+    }
 
+    @GetMapping("/orders")
+    public List<OrderDetails> getOrders() {
+        return orderService.getOrders();
     }
 }

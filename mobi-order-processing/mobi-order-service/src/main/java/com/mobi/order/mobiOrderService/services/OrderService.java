@@ -43,11 +43,6 @@ public class OrderService {
         return modelMapper.map(orderDetails, OrderDto.class);
     }
 
-//    private OrderDetails convertToEntity(OrderDto orderDto) {
-//        return modelMapper.map(orderDto, OrderDetails.class);
-//    }
-
-
     private OrderDto orderEntityToOrderDto(OrderDetails orderDetails) {
         return convertToDto(orderDetails);
     }
@@ -65,5 +60,19 @@ public class OrderService {
     public OrderResponseDto getOrderStatus(OrderResponseDto orderResponseDto) {
 
         return orderResponseDto;
+    }
+
+    public String deleteOrder (Long orderId){
+        if(orderRepository.findByOrderId(orderId)!=null){
+            orderRepository.deleteById(orderId);
+            return "Order deleted successfuly";
+        }
+        else{
+           return "ObjectId not found";
+        }
+    }
+
+    public List<OrderDetails> getOrders() {
+        return orderRepository.findAll();
     }
 }
