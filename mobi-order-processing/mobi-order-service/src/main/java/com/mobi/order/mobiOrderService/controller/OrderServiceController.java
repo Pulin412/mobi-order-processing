@@ -1,6 +1,7 @@
 package com.mobi.order.mobiOrderService.controller;
 
-import com.mobi.order.mobiOrderService.entities.Order;
+import com.mobi.order.mobiOrderService.dto.OrderResponseDto;
+import com.mobi.order.mobiOrderService.entities.OrderDetails;
 import com.mobi.order.mobiOrderService.dto.OrderDto;
 import com.mobi.order.mobiOrderService.repository.OrderRepository;
 import com.mobi.order.mobiOrderService.services.OrderService;
@@ -16,6 +17,7 @@ import java.util.Map;
 public class OrderServiceController {
 
     OrderDto orderDto;
+    OrderResponseDto orderResponseDto;
 
     @Autowired
     private OrderService orderService;
@@ -23,32 +25,18 @@ public class OrderServiceController {
     @Autowired
     private OrderRepository orderRepository;
 
-    @GetMapping("/test")
-    public String testMessage() {
-        Order o1 = new Order();
-        o1.setOrderStatus("complete");
-        Date date = new Date();
-        o1.setOrderTime(date);
-        Map<String, Integer> map = new HashMap<>();
-        map.put("Pen", 10);
-        o1.setProductQtyMap(map);
-        if (o1 != null)
-            orderRepository.save(o1);
-        return "Added successfully";
-    }
-
-    @RequestMapping("/{orderId}")
-    public Order getOrder(@PathVariable Long orderId) {
+    @GetMapping("/{orderId}")
+    public OrderDetails getOrder(@PathVariable Long orderId) {
         return orderService.getOrder(orderId);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/placeOrder")
-    public Long placeOrder(OrderDto orderDto) {
+    @PostMapping("/placeOrder")
+    public @ResponseBody  OrderResponseDto placeOrder(@RequestBody OrderDto orderDto) {
         return orderService.placeOrder(orderDto);
     }
 
-    @RequestMapping("/getOrderStatus/{orderId}")
-    public String getOrderStatus(@PathVariable Long orderId) {
-        return orderService.getOrderStatus(orderId);
+    @GetMapping("/deleteOrder/{orderId}")
+    public void deleteOrder (@PathVariable Long orderId) {
+
     }
 }

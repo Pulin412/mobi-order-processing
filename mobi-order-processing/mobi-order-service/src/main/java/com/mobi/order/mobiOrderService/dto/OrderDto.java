@@ -1,14 +1,13 @@
 package com.mobi.order.mobiOrderService.dto;
 
 
-import com.mobi.inventory.dto.ProductDto;
 import lombok.Data;
 
-import java.util.List;
+import java.util.Map;
 
 @Data
 public class OrderDto {
     long orderId;
     long customerId;
-    List<ProductDto> products;
+    Map<Long, Integer> productQuantityMap;
 }

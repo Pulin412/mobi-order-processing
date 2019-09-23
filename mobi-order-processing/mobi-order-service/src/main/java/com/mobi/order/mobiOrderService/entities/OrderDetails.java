@@ -8,7 +8,7 @@ import java.util.Map;
 
 @Entity
 @Data
-public class Order {
+public class OrderDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="order_id")
@@ -21,5 +21,5 @@ public class Order {
     private Date orderTime;
 
     @ElementCollection
-    private Map<String, Integer> productQtyMap;
+    Map<Long, Integer> productQuantityMap;
 }
