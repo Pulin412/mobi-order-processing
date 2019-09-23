@@ -19,7 +19,8 @@
 		<module>mobi-customer-service</module>
 		<module>mobi-inventory-service</module>
 		<module>mobi-order-service</module>
-	</modules>
+		<module>mobi-discovery-server</module>
+    </modules>
 
 	<properties>
 		<java.version>1.8</java.version>

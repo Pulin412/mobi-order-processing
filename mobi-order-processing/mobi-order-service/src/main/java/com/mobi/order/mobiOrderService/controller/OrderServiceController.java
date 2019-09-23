@@ -1,19 +1,19 @@
 package com.mobi.order.mobiOrderService.controller;
 
-import com.mobi.order.mobiOrderService.dto.OrderResponseDto;
-import com.mobi.order.mobiOrderService.entities.OrderDetails;
+
 import com.mobi.order.mobiOrderService.dto.OrderDto;
+import com.mobi.order.mobiOrderService.dto.OrderResponseDto;
+import com.mobi.order.mobiOrderService.dto.ResponseDto;
+import com.mobi.order.mobiOrderService.entities.OrderDetails;
 import com.mobi.order.mobiOrderService.repository.OrderRepository;
 import com.mobi.order.mobiOrderService.services.OrderService;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+@RefreshScope
 @RestController
 public class OrderServiceController {
 
