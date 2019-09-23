@@ -2,11 +2,13 @@ package com.mobi.inventory;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 /**
  * The type Mobi inventory service application.
  */
 @SpringBootApplication
+@EnableEurekaClient
 public class MobiInventoryServiceApplication {
 
     /**
