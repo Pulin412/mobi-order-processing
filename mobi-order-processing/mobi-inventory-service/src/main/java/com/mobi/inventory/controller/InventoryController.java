@@ -35,7 +35,7 @@ public class InventoryController {
      * @param id the id
      * @return the response dto
      */
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/product/{id}")
     public ResponseDto findById(@PathVariable String id) {
         return inventoryService.getProductById(id);
     }
@@ -46,7 +46,7 @@ public class InventoryController {
      * @param name the name
      * @return the response dto
      */
-    @GetMapping(value = "/findByName/{name}")
+    @GetMapping(value = "/product/{name}")
     public ResponseDto findByName(@PathVariable String name) {
         return inventoryService.getProductByName(name);
     }
