@@ -7,13 +7,13 @@ import com.mobi.order.mobiOrderService.dto.ResponseDto;
 import com.mobi.order.mobiOrderService.entities.OrderDetails;
 import com.mobi.order.mobiOrderService.repository.OrderRepository;
 import com.mobi.order.mobiOrderService.services.OrderService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RefreshScope
+@RequestMapping("order/api/v1")
 @RestController
 public class OrderServiceController {
 
@@ -26,6 +26,7 @@ public class OrderServiceController {
     @Autowired
     private OrderRepository orderRepository;
 
+    @ApiOperation("this is the end point to get an order from the records ")
     @GetMapping("/{orderId}")
     public OrderDetails getOrder(@PathVariable Long orderId) {
         return orderService.getOrder(orderId);
