@@ -15,22 +15,23 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 @Service
 public class OrderService {
 
-    @Autowired
     OrderRepository orderRepository;
-
-    @Autowired
     ModelMapper modelMapper;
+    ProductClient productClient;
+    ProductDto productDto;
+    OrderResponseDto orderResponseDto;
 
     @Autowired
-    ProductClient productClient;
-
-    ProductDto productDto = new ProductDto();
-
-    OrderResponseDto orderResponseDto = new OrderResponseDto();
+    public OrderService(OrderRepository orderRepository, ModelMapper modelMapper, ProductClient productClient) {
+        this.orderRepository = orderRepository;
+        this.modelMapper = modelMapper;
+        this.productClient = productClient;
+    }
 
     public OrderDetails getOrder(Long orderId) {
         return orderRepository.findByOrderId(orderId);
@@ -52,7 +53,7 @@ public class OrderService {
     private OrderResponseDto updateInventories(Map<Long, Integer> productQuantityMap) {
         for (Map.Entry<Long, Integer> eachProduct : productQuantityMap.entrySet()) {
             ResponseDto productById = productClient.findProductById(eachProduct.getKey().toString());
-            if (productById.getProductDtoList() != null) {
+            if (productById.getProductDtoList() != null && !productById.getProductDtoList().isEmpty() ) {
                 if (eachProduct.getValue() <= productById.getProductDtoList().get(0).getQuantity()) {
                     productDto = productById.getProductDtoList().get(0);
                     productDto.setQuantity(productDto.getQuantity() - eachProduct.getValue());

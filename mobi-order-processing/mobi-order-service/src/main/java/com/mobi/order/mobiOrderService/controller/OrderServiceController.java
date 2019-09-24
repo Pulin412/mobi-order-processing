@@ -19,22 +19,19 @@ public class OrderServiceController {
 
     OrderDto orderDto;
     OrderResponseDto orderResponseDto;
-
-    @Autowired
     private OrderService orderService;
+    private OrderRepository orderRepository;
 
     @Autowired
-    private OrderRepository orderRepository;
+    public OrderServiceController(OrderService orderService, OrderRepository orderRepository) {
+        this.orderService = orderService;
+        this.orderRepository = orderRepository;
+    }
 
     @ApiOperation("this is the end point to get an order from the records ")
     @GetMapping("/{orderId}")
     public OrderDetails getOrder(@PathVariable Long orderId) {
         return orderService.getOrder(orderId);
-    }
-
-    @GetMapping("/test")
-    public ResponseDto testProduct() {
-        return orderService.getInventory();
     }
 
     @PostMapping("/placeOrder")
