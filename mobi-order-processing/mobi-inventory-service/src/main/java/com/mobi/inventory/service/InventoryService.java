@@ -127,13 +127,20 @@ public class InventoryService {
         ResponseDto responseDto = new ResponseDto("", HttpStatus.OK.toString(), null);
         if (tempProduct.isPresent()) {
             Product product = tempProduct.get();
-            product.setCategory(productDto.getCategory());
-            product.setBasePrice(productDto.getBasePrice());
-            product.setDescription(productDto.getDescription());
-            product.setMrp(productDto.getMrp());
-            product.setName(productDto.getName());
-            product.setTax(productDto.getTax());
-            product.setQuantity(productDto.getQuantity());
+            if(productDto.getCategory() != null)
+                product.setCategory(productDto.getCategory());
+            if(productDto.getBasePrice() != null)
+                product.setBasePrice(productDto.getBasePrice());
+            if(productDto.getDescription() != null)
+                product.setDescription(productDto.getDescription());
+            if(productDto.getMrp() != null)
+                product.setMrp(productDto.getMrp());
+            if(productDto.getName() != null)
+                product.setName(productDto.getName());
+            if(productDto.getTax() != null)
+                product.setTax(productDto.getTax());
+            if(productDto.getQuantity() != null)
+                product.setQuantity(productDto.getQuantity());
             inventoryRepository.save(product);
             productList.add(product);
             responseDto.setMessage("Updated the product");
