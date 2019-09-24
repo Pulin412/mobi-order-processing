@@ -31,14 +31,20 @@ public class OrderServiceController {
         return orderService.getOrder(orderId);
     }
 
+    @GetMapping("/test")
+    public ResponseDto testProduct() {
+        return orderService.getInventory();
+    }
+
     @PostMapping("/placeOrder")
-    public @ResponseBody  OrderResponseDto placeOrder(@RequestBody OrderDto orderDto) {
+    public @ResponseBody
+    OrderResponseDto placeOrder(@RequestBody OrderDto orderDto) {
         return orderService.placeOrder(orderDto);
     }
 
     @DeleteMapping("/deleteOrder/{orderId}")
-    public String deleteOrder (@PathVariable Long orderId) {
-       return orderService.deleteOrder(orderId);
+    public String deleteOrder(@PathVariable Long orderId) {
+        return orderService.deleteOrder(orderId);
     }
 
     @GetMapping("/orders")
