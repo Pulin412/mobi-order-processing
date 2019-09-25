@@ -45,17 +45,12 @@ public class CustomerService {
   }
 
   public ResponseDto getCustomerById(Long id) {
-    Optional<Customer> customer = customerRepository.findById(id);
+    Optional<Customer> optionalCustomer = customerRepository.findById(id);
     ResponseDto responseDto = new ResponseDto("", HttpStatus.OK.toString(), null);
     CustomerDto customerDto = null;
     List<CustomerDto> customerDtoList = new ArrayList<>();
-    if (customer.isPresent()) {
-      customerDto = new CustomerDto("", "", "", 0L);
-      customerDto.setAddress(customer.get().getAddress());
-      customerDto.setCustomerName(customer.get().getCustomerName());
-      customerDto.setContact(customer.get().getContact());
-      customerDto.setEmail(customer.get().getEmail());
-      customerDtoList.add(customerDto);
+    if (optionalCustomer.isPresent()) {
+      customerDtoList.add(customerServiceUtil.convertToDto(optionalCustomer.get()));
       responseDto.setMessage(CustomerServiceConstants.CUSTOMER_LIST);
       responseDto.setCustomerDtoList(customerDtoList);
       log.debug("CustomerService : Fetching Customer details with id: {}", id);
@@ -68,12 +63,7 @@ public class CustomerService {
   public ResponseDto createCustomer(CustomerDto customerDto) throws RecordNotFoundException {
     List<CustomerDto> customerDtoList = new ArrayList<>();
     Customer customer = new Customer();
-    customer.setCustomerName(customerDto.getCustomerName());
-    customer.setAddress(customerDto.getAddress());
-    customer.setEmail(customerDto.getEmail());
-    customer.setContact(customerDto.getContact());
-
-    customerRepository.save(customer);
+    customerRepository.save(customerServiceUtil.convertToEntity(customerDto));
     customerDtoList.add(customerServiceUtil.convertToDto(customer));
     log.debug("CustomerService : creating new customer : {}");
     return new ResponseDto(
@@ -81,16 +71,12 @@ public class CustomerService {
   }
 
   public ResponseDto updateCustomer(Long id, CustomerDto customerDto) {
-    Optional<Customer> updateCustomerRecord = customerRepository.findById(id);
+    Optional<Customer> customerOptional = customerRepository.findById(id);
     ResponseDto responseDto = new ResponseDto("", HttpStatus.OK.toString(), null);
     List<CustomerDto> customerDtoList = new ArrayList<>();
-    if (updateCustomerRecord.isPresent()) {
-      Customer customer = updateCustomerRecord.get();
-      customer.setCustomerName(customerDto.getCustomerName());
-      customer.setAddress(customerDto.getAddress());
-      customer.setEmail(customerDto.getEmail());
-      customer.setContact(customerDto.getContact());
-      customerRepository.save(customer);
+    if (customerOptional.isPresent()) {
+      Customer customer = customerOptional.get();
+      customerRepository.save(customerServiceUtil.convertToEntity(customerDto));
       customerDtoList.add(customerServiceUtil.convertToDto(customer));
       responseDto.setMessage(CustomerServiceConstants.CUSTOMER_CREATED);
       responseDto.setCustomerDtoList(customerDtoList);
@@ -101,13 +87,13 @@ public class CustomerService {
   }
 
   public ResponseDto deleteCustomerById(Long id) throws RecordNotFoundException {
-    Optional<Customer> customer = customerRepository.findById(id);
+    Optional<Customer> customerOptional = customerRepository.findById(id);
     List<CustomerDto> customerDtoList = new ArrayList<>();
     responseMsg = "Customer Deleted Successfully...!!";
     ResponseDto responseDto = new ResponseDto("", HttpStatus.OK.toString(), null);
-    if (customer.isPresent()) {
+    if (customerOptional.isPresent()) {
       customerRepository.deleteById(id);
-      customerDtoList.add(customerServiceUtil.convertToDto(customer.get()));
+      customerDtoList.add(customerServiceUtil.convertToDto(customerOptional.get()));
       responseDto.setMessage(responseMsg);
       responseDto.setCustomerDtoList(customerDtoList);
 
