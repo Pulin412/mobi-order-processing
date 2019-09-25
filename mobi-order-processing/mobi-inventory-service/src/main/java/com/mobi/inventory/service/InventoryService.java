@@ -31,8 +31,8 @@ public class InventoryService {
      * @param productId the product id
      * @return the product by id
      */
-    public ResponseDto getProductById(String productId) {
-        Optional<Product> product = inventoryRepository.findById(Long.valueOf(productId));
+    public ResponseDto getProductById(Long productId) {
+        Optional<Product> product = inventoryRepository.findById(productId);
         ResponseDto responseDto = new ResponseDto("", HttpStatus.OK.toString(), null);
         if (product.isPresent()) {
             List<Product> productList = new ArrayList<>();
