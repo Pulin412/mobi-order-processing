@@ -24,6 +24,7 @@ public class CustomerController {
         return customerService.getAllCustomers();
     }
 
+
     @GetMapping("/{id}")
     public ResponseDto getCustomerById(@PathVariable Long id) {
         log.debug("Fetching Customer details with id: {}", id);
@@ -36,6 +37,7 @@ public class CustomerController {
         log.debug("creating new customer : {}", customer);
         return customerService.createCustomer(customer);
     }
+
 
     @PutMapping("/{id}")
     public ResponseDto updateCustomer(@RequestBody CustomerDto customer, @PathVariable Long id)
