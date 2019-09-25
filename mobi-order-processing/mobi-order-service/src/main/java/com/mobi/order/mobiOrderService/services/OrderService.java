@@ -23,8 +23,9 @@ public class OrderService {
     ModelMapper modelMapper;
     ProductClient productClient;
     ProductDto productDto;
-    OrderResponseDto orderResponseDto = new OrderResponseDto();
 
+    OrderResponseDto orderResponseDto = new OrderResponseDto();
+  
     @Autowired
     public OrderService(OrderRepository orderRepository, ModelMapper modelMapper, ProductClient productClient) {
         this.orderRepository = orderRepository;
@@ -45,6 +46,7 @@ public class OrderService {
         return productClient.findAll();
     }
 
+
     private OrderResponseDto updateInventories(OrderDto orderDto) {
         Map<Long, Integer> productQuantityMap = orderDto.getProductQuantityMap();
         for (Map.Entry<Long, Integer> eachProduct : productQuantityMap.entrySet()) {
@@ -58,6 +60,7 @@ public class OrderService {
                     orderResponseDto.setStatus(OrderStatus.Placed);
                     OrderDetails orderDetails = orderRepository.save(orderDtoToOrderEntity(orderDto));
                     orderResponseDto.setOrderDto(orderEntityToOrderDto(orderDetails));
+
                 } else {
                     orderResponseDto.setMessage("Not enough quantity in stock");
                     orderResponseDto.setStatus(OrderStatus.Cancelled);
@@ -97,6 +100,7 @@ public class OrderService {
         if (orderRepository.findByOrderId(orderId) != null) {
             orderRepository.deleteById(orderId);
             return "Order deleted successfully";
+
         } else {
             return "ObjectId not found";
         }
