@@ -12,10 +12,15 @@
     <properties>
         <java.version>1.8</java.version>
         <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
+       <!-- <inventory.version>0.0.1-SNAPSHOT</inventory.version>-->
     </properties>
 
     <dependencies>
-
+        <dependency>
+            <groupId>com.mobi.demo</groupId>
+            <artifactId>mobi-inventory-service</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
