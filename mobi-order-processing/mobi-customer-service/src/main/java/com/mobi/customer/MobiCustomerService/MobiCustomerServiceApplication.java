@@ -10,8 +10,8 @@ public class MobiCustomerServiceApplication {
         SpringApplication.run(MobiCustomerServiceApplication.class, args);
     }
 
+    
 }
-
 
 
 

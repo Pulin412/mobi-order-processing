@@ -1,11 +1,13 @@
 package com.mobi.customer.MobiCustomerService.entity;
 
+
 import lombok.Data;
 
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 
+import javax.persistence.*;
 @Data
 @Slf4j
 @Entity
