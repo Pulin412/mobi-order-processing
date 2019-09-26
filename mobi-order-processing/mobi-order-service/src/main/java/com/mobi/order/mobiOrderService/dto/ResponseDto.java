@@ -1,6 +1,7 @@
 package com.mobi.order.mobiOrderService.dto;
 
 import com.mobi.inventory.dto.ProductDto;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

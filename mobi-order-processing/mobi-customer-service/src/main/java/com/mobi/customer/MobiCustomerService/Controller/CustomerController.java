@@ -18,13 +18,14 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-    @GetMapping("/getAllCustomer")
+    @GetMapping("/")
     public ResponseDto getAllCustomers() {
         log.debug("Fetching all Customer records from table : {}");
         return customerService.getAllCustomers();
     }
 
-    @GetMapping("/getCustomer/{id}")
+
+    @GetMapping("/{id}")
     public ResponseDto getCustomerById(@PathVariable Long id) {
         log.debug("Fetching Customer details with id: {}", id);
         return customerService.getCustomerById(id);
@@ -37,14 +38,15 @@ public class CustomerController {
         return customerService.createCustomer(customer);
     }
 
-    @PutMapping("/update/{id}")
+
+    @PutMapping("/{id}")
     public ResponseDto updateCustomer(@RequestBody CustomerDto customer, @PathVariable Long id)
             {
         log.debug("updating customer with id : {}", id);
         return customerService.updateCustomer(id, customer);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseDto deleteCustomerById(@PathVariable("id") Long id) throws RecordNotFoundException {
         log.debug("Deleting Customer records with id: {}", id);
         return customerService.deleteCustomerById(id);
