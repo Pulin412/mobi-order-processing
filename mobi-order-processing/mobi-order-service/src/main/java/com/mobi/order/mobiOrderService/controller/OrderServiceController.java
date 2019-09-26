@@ -3,7 +3,6 @@ package com.mobi.order.mobiOrderService.controller;
 
 import com.mobi.order.mobiOrderService.dto.OrderDto;
 import com.mobi.order.mobiOrderService.dto.OrderResponseDto;
-import com.mobi.order.mobiOrderService.dto.ResponseDto;
 import com.mobi.order.mobiOrderService.entities.OrderDetails;
 import com.mobi.order.mobiOrderService.repository.OrderRepository;
 import com.mobi.order.mobiOrderService.services.OrderService;

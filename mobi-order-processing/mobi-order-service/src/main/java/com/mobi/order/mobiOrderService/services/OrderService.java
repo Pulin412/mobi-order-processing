@@ -1,9 +1,9 @@
 package com.mobi.order.mobiOrderService.services;
 
+import com.mobi.inventory.dto.ProductDto;
 import com.mobi.order.mobiOrderService.controller.ProductClient;
 import com.mobi.order.mobiOrderService.dto.OrderDto;
 import com.mobi.order.mobiOrderService.dto.OrderResponseDto;
-import com.mobi.order.mobiOrderService.dto.ProductDto;
 import com.mobi.order.mobiOrderService.dto.ResponseDto;
 import com.mobi.order.mobiOrderService.entities.OrderDetails;
 import com.mobi.order.mobiOrderService.repository.OrderRepository;
@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 
 @Service
 public class OrderService {
@@ -24,8 +23,9 @@ public class OrderService {
     ModelMapper modelMapper;
     ProductClient productClient;
     ProductDto productDto;
-    OrderResponseDto orderResponseDto;
 
+    OrderResponseDto orderResponseDto = new OrderResponseDto();
+  
     @Autowired
     public OrderService(OrderRepository orderRepository, ModelMapper modelMapper, ProductClient productClient) {
         this.orderRepository = orderRepository;
@@ -38,11 +38,7 @@ public class OrderService {
     }
 
     public OrderResponseDto placeOrder(OrderDto orderDto) {
-
-        OrderDetails orderDetails = orderRepository.save(orderDtoToOrderEntity(orderDto));
-        orderResponseDto.setOrderDto(orderEntityToOrderDto(orderDetails));
-        updateInventories(orderDto.getProductQuantityMap());
-        orderResponseDto.setOrderDto(orderEntityToOrderDto(orderDetails));
+        updateInventories(orderDto);
         return orderResponseDto;
     }
 
@@ -50,7 +46,9 @@ public class OrderService {
         return productClient.findAll();
     }
 
-    private OrderResponseDto updateInventories(Map<Long, Integer> productQuantityMap) {
+
+    private OrderResponseDto updateInventories(OrderDto orderDto) {
+        Map<Long, Integer> productQuantityMap = orderDto.getProductQuantityMap();
         for (Map.Entry<Long, Integer> eachProduct : productQuantityMap.entrySet()) {
             ResponseDto productById = productClient.findProductById(eachProduct.getKey().toString());
             if (productById.getProductDtoList() != null && !productById.getProductDtoList().isEmpty() ) {
@@ -60,6 +58,9 @@ public class OrderService {
                     productClient.updateProduct(productDto);
                     orderResponseDto.setMessage("Order Successfully placed");
                     orderResponseDto.setStatus(OrderStatus.Placed);
+                    OrderDetails orderDetails = orderRepository.save(orderDtoToOrderEntity(orderDto));
+                    orderResponseDto.setOrderDto(orderEntityToOrderDto(orderDetails));
+
                 } else {
                     orderResponseDto.setMessage("Not enough quantity in stock");
                     orderResponseDto.setStatus(OrderStatus.Cancelled);
@@ -98,7 +99,8 @@ public class OrderService {
     public String deleteOrder(Long orderId) {
         if (orderRepository.findByOrderId(orderId) != null) {
             orderRepository.deleteById(orderId);
-            return "Order deleted successfuly";
+            return "Order deleted successfully";
+
         } else {
             return "ObjectId not found";
         }
