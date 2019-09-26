@@ -34,6 +34,7 @@ public class CustomerService {
   String responseMsg = "";
 
   public ResponseDto getAllCustomers() {
+      log.info("Reading through Service class");
     List<Customer> customerList = customerRepository.findAll();
     responseMsg = CustomerServiceConstants.CUSTOMER_LIST;
     ResponseDto responseDto = new ResponseDto("", HttpStatus.OK.toString(), null);
@@ -67,8 +68,8 @@ public class CustomerService {
 
   public ResponseDto createCustomer(CustomerDto customerDto) throws RecordNotFoundException {
     List<CustomerDto> customerDtoList = new ArrayList<>();
-    Customer customer = new Customer();
-    customerRepository.save(customerServiceUtil.convertToEntity(customerDto));
+    Customer customer;
+    customer = customerRepository.save(customerServiceUtil.convertToEntity(customerDto));
     customerDtoList.add(customerServiceUtil.convertToDto(customer));
     log.debug("CustomerService : creating new customer : {}");
     return new ResponseDto(

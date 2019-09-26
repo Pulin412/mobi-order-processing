@@ -12,11 +12,14 @@ import java.util.List;
 @Service
 public class CustomerServiceUtil {
 
-  @Autowired ModelMapper  modelMapper;
+  private ModelMapper modelMapper;
 
-  private CustomerServiceUtil() {}
+  @Autowired
+  public CustomerServiceUtil(ModelMapper modelMapper) {
+    this.modelMapper = modelMapper;
+  }
 
-  public  List<CustomerDto> customerListToCustomerDtoList(List<Customer> customerList) {
+  public List<CustomerDto> customerListToCustomerDtoList(List<Customer> customerList) {
     List<CustomerDto> customerDtoList = new ArrayList<>();
     for (Customer customer : customerList) {
       customerDtoList.add(convertToDto(customer));
@@ -24,7 +27,7 @@ public class CustomerServiceUtil {
     return customerDtoList;
   }
 
-  public  List<Customer> customerDtoListToCustomerList(List<CustomerDto> customerDtoList) {
+  public List<Customer> customerDtoListToCustomerList(List<CustomerDto> customerDtoList) {
     List<Customer> customerList = new ArrayList<>();
     for (CustomerDto customerDto : customerDtoList) {
       customerList.add(convertToEntity(customerDto));
@@ -32,7 +35,7 @@ public class CustomerServiceUtil {
     return customerList;
   }
 
-  public  CustomerDto convertToDto(Customer customer) {
+  public CustomerDto convertToDto(Customer customer) {
     return modelMapper.map(customer, CustomerDto.class);
   }
 
