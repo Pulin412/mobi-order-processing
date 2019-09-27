@@ -87,7 +87,8 @@ public class CustomerServiceTest {
     Mockito.when(customerRepository.findAll()).thenReturn(customerList);
 
     ResponseDto expectedResponse = new ResponseDto("", HttpStatus.OK.toString(), null);
-    List<CustomerDto> customerDtoList = customerServiceUtil.customerListToCustomerDtoList(customerList);
+    List<CustomerDto> customerDtoList =
+        customerServiceUtil.customerListToCustomerDtoList(customerList);
     expectedResponse.setCustomerDtoList(customerDtoList);
     expectedResponse.setMessage(CustomerServiceConstants.CUSTOMER_LIST);
     ResponseDto actualResponse = customerService.getAllCustomers();
@@ -96,21 +97,38 @@ public class CustomerServiceTest {
   }
 
   @Test
-  public void testgetCustomerById()
-  {
+  public void testgetCustomerById() {
     Customer customer = new Customer(1L, "Anand", "Pune", "anand@gmail.com", 1234L);
-    Optional<Customer> customerOptional=Optional.of(customer);
+    Optional<Customer> customerOptional = Optional.of(customer);
     Mockito.when(customerRepository.findById(1L)).thenReturn(customerOptional);
 
     ResponseDto expectedResponse = new ResponseDto("", HttpStatus.OK.toString(), null);
     CustomerDto customerDto = new CustomerDto("Anand", "Pune", "anand@gmail.com", 1234L);
-    List<CustomerDto> customerDtoList= new ArrayList<>();
+    List<CustomerDto> customerDtoList = new ArrayList<>();
     customerDtoList.add(customerServiceUtil.convertToDto(customer));
     expectedResponse.setMessage(CustomerServiceConstants.CUSTOMER_LIST);
     expectedResponse.setCustomerDtoList(customerDtoList);
 
-    ResponseDto actualResponse=customerService.getCustomerById(1L);
+    ResponseDto actualResponse = customerService.getCustomerById(1L);
 
-    Assert.assertEquals(expectedResponse,actualResponse);
+    Assert.assertEquals(expectedResponse, actualResponse);
+  }
+
+  @Test
+  public void testdeleteCustomerById() throws RecordNotFoundException {
+    Customer customer = new Customer(1L, "Anand", "Pune", "anand@gmail.com", 1234L);
+    Optional<Customer> customerOptional = Optional.of(customer);
+    Mockito.when(customerRepository.findById(1L)).thenReturn(customerOptional);
+    Mockito.doNothing().when(customerRepository).deleteById(1L);
+
+    CustomerDto customerDto = new CustomerDto("Anand", "Pune", "anand@gmail.com", 1234L);
+    ResponseDto expectedResponse = new ResponseDto("", HttpStatus.OK.toString(), null);
+    List<CustomerDto> customerDtoList = new ArrayList<>();
+    customerDtoList.add(customerServiceUtil.convertToDto(customer));
+    expectedResponse.setMessage("Customer Deleted Successfully...!!");
+    expectedResponse.setCustomerDtoList(customerDtoList);
+
+    ResponseDto actualResponse = customerService.deleteCustomerById(1L);
+    Assert.assertEquals(expectedResponse, actualResponse);
   }
 }

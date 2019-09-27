@@ -102,7 +102,6 @@ public class CustomerService {
       customerDtoList.add(customerServiceUtil.convertToDto(customerOptional.get()));
       responseDto.setMessage(responseMsg);
       responseDto.setCustomerDtoList(customerDtoList);
-
     } else {
       responseDto.setMessage(CustomerServiceConstants.NO_RECORDS_FOUND + "with id: " + id);
     }
