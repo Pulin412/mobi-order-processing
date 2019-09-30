@@ -80,8 +80,8 @@ public class InventoryService {
      * @return the response dto
      */
     public ResponseDto addListOfProducts(List<ProductDto> productDtoList) {
-        List<Product> productList1 = inventoryRepository.saveAll(productDtoListToProductList(productDtoList));
-        return new ResponseDto("Added products", HttpStatus.OK.toString(), productListToProductDtoList(productList1));
+        List<Product> productList = inventoryRepository.saveAll(productDtoListToProductList(productDtoList));
+        return new ResponseDto("Added products", HttpStatus.OK.toString(), productListToProductDtoList(productList));
     }
 
     /**
@@ -90,8 +90,8 @@ public class InventoryService {
      * @param id the id
      * @return the response dto
      */
-    public ResponseDto removeProduct(String id) {
-        Optional<Product> product = inventoryRepository.findById(Long.valueOf(id));
+    public ResponseDto removeProduct(Long id) {
+        Optional<Product> product = inventoryRepository.findById(id);
         ResponseDto responseDto = new ResponseDto("", HttpStatus.OK.toString(), null);
         if (product.isPresent()) {
             inventoryRepository.delete(product.get());
@@ -162,7 +162,9 @@ public class InventoryService {
     private List<Product> productDtoListToProductList(List<ProductDto> productDtoList) {
         List<Product> productList = new ArrayList<>();
         for (ProductDto productDto : productDtoList) {
-            productList.add(convertToEntity(productDto));
+            Product product = convertToEntity(productDto);
+            productList.add(product);
+
         }
         return productList;
     }

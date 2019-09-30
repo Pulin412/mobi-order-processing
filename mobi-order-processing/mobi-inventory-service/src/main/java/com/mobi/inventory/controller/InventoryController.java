@@ -69,7 +69,7 @@ public class InventoryController {
      * @return the response dto
      */
     @DeleteMapping("/{id}")
-    public ResponseDto removeProduct(@PathVariable String id) {
+    public ResponseDto removeProduct(@PathVariable Long id) {
         return inventoryService.removeProduct(id);
     }
 
