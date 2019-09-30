@@ -46,7 +46,7 @@ public class InventoryController {
      * @param name the name
      * @return the response dto
      */
-    @GetMapping(value = "/product/{name}")
+    @GetMapping(value = "/products/{name}")
     public ResponseDto findByName(@PathVariable String name) {
         return inventoryService.getProductByName(name);
     }
