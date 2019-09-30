@@ -84,7 +84,7 @@ public class CustomerService {
       Customer customer = customerOptional.get();
       customerRepository.save(customerServiceUtil.convertToEntity(customerDto));
       customerDtoList.add(customerServiceUtil.convertToDto(customer));
-      responseDto.setMessage(CustomerServiceConstants.CUSTOMER_CREATED);
+      responseDto.setMessage(CustomerServiceConstants.CUSTOMER_RECORDS_UPDATED);
       responseDto.setCustomerDtoList(customerDtoList);
     } else {
       responseDto.setMessage(CustomerServiceConstants.NO_RECORDS_FOUND);
