@@ -55,7 +55,7 @@ public class ProductControllerUnitTest {
     public void retrieveProductByIdTest() throws Exception {
         ResponseDto resDto = new ResponseDto("OK", "200", mockProductDTOList());
         Mockito.when(inventoryService.getProductById(1L)).thenReturn(resDto);
-        RequestBuilder requestBuilder = MockMvcRequestBuilders.get(baseUri+ "/products/{id}",1L);
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.get(baseUri+ "/product/{id}",1L);
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
         assertEquals(200,result.getResponse().getStatus());
         assertNotNull(result.getResponse().getContentAsString());
@@ -104,12 +104,12 @@ public class ProductControllerUnitTest {
     }
 
     @Test
-    public void updateProductsTest() throws Exception {
+    public void updateProductTest() throws Exception {
         ResponseDto resDto = new ResponseDto("OK", "200", mockProductDTOList());
         Mockito.when(inventoryService.updateProduct(mockProductDTO())).thenReturn(resDto);
         RequestBuilder requestBuilder = MockMvcRequestBuilders.put(baseUri+ "/")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(asJsonString(mockProduct()));
+                .content(asJsonString(mockProductDTO()));
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
         assertEquals(200,result.getResponse().getStatus());
         assertNotNull(result.getResponse().getContentAsString());

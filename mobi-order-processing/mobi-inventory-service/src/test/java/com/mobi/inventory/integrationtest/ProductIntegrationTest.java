@@ -57,7 +57,8 @@ public class ProductIntegrationTest {
     @Test
     public void updateProductIntegrationTest() throws Exception {
         headers.set(HttpHeaders.CONTENT_TYPE,"application/json");
-        HttpEntity<List<ProductDto>> entity = new HttpEntity<>(mockProductDTO(), headers);
+        ProductDto productDtoOne = new ProductDto(1L,"Casual Shirt", "Casual shirt", 900.0, 999.0, 10.0, "FASHION",3);
+        HttpEntity<ProductDto> entity = new HttpEntity<>(productDtoOne, headers);
         ResponseEntity<String> response = testRestTemplate.exchange(
                 createURLWithPort("/"), HttpMethod.PUT, entity, String.class);
         assertEquals(200, response.getStatusCodeValue());
