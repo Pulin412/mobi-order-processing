@@ -3,11 +3,13 @@ package com.mobi.customer.MobiCustomerService.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Slf4j
 @Entity
 @Table(name = "CUSTOMER")
