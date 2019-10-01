@@ -7,4 +7,5 @@ public final class CustomerServiceConstants {
   public static final String CUSTOMER_LIST = "List of customers..!!";
   public static final String NO_RECORDS_FOUND = "No records found/No such customer available";
   public static final String CUSTOMER_RECORDS_UPDATED = "Customer Record updated successfully";
+
 }
