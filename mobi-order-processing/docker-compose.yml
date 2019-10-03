@@ -8,7 +8,6 @@ networks:
 services:
   discovery-server:
     restart: always
-    mem_limit: 512m
     build: mobi-discovery-server/.
     image: discovery-server
     container_name: discovery-server
@@ -19,7 +18,6 @@ services:
 
   inventory-service:
     restart: always
-    mem_limit: 512m
     build: mobi-inventory-service/.
     image: inventory-service
     container_name: inventory-service
@@ -30,18 +28,31 @@ services:
     networks:
       - mobi-order-processing
 
-#  customer-service:
-#    restart: always
-#    mem_limit: 512m
-#    build: mobi-customer-service/.
-#    image: customer-service
-#    container_name: customer-service
-#    depends_on:
-#      - discovery-server
-#    ports:
-#      - 8083:8083
-#    networks:
-#      - mobi-order-processing
+  customer-service:
+    restart: always
+    build: mobi-customer-service/.
+    image: customer-service
+    container_name: customer-service
+    depends_on:
+      - discovery-server
+    ports:
+      - 8083:8083
+    networks:
+      - mobi-order-processing
+
+  order-service:
+      restart: always
+      build: mobi-order-service/.
+      image: order-service
+      container_name: order-service
+      depends_on:
+        - discovery-server
+        - inventory-service
+        - customer-service
+      ports:
+        - 8082:8082
+      networks:
+        - mobi-order-processing
 
   postgres:
     image: postgres
@@ -50,7 +61,7 @@ services:
     environment:
       - POSTGRES_PASSWORD=root
       - POSTGRES_USER=root
-      - POSTGRES_DB=testdb
+      - POSTGRES_DB=mobi-order-processing-db
     ports:
       - 5432:5432
     volumes:
