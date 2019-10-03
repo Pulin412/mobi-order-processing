@@ -56,7 +56,6 @@ public class CustomerControllerTest {
     Customer customer = new Customer(1L, "Anand", "Mumbai", "anand@gmail.com", 1234L);
     Optional<Customer> customerOptional = Optional.of(customer);
     ResponseDto expectedResponse = new ResponseDto("", HttpStatus.OK.toString(), null);
-    CustomerDto customerDto = null;
     List<CustomerDto> customerDtoList = new ArrayList<>();
     customerDtoList.add(customerServiceUtil.convertToDto(customerOptional.get()));
     expectedResponse.setCustomerDtoList(customerDtoList);

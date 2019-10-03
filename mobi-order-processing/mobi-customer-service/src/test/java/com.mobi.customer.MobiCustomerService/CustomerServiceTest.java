@@ -34,8 +34,6 @@ public class CustomerServiceTest {
 
   @Spy private CustomerServiceUtil customerServiceUtil = new CustomerServiceUtil(new ModelMapper());
 
-
-
   @Test
   public void testupdateCustomer() {
     Long id = 1L;
@@ -49,11 +47,12 @@ public class CustomerServiceTest {
     /* TEST REQUEST */
     CustomerDto customerDto = new CustomerDto("Anand", "Pune", "anand@gmail.com", 1234L);
     ResponseDto expectedResponse = new ResponseDto("", HttpStatus.OK.toString(), null);
-    expectedResponse.setMessage(CustomerServiceConstants.CUSTOMER_CREATED);
+
+    expectedResponse.setMessage(CustomerServiceConstants.CUSTOMER_RECORDS_UPDATED);
     List<CustomerDto> customerDtoList = new ArrayList<>();
     customerDtoList.add(customerDto);
     expectedResponse.setCustomerDtoList(customerDtoList);
-    expectedResponse.setMessage(CustomerServiceConstants.CUSTOMER_CREATED);
+    expectedResponse.setMessage(CustomerServiceConstants.CUSTOMER_RECORDS_UPDATED);
 
     ResponseDto actualResponse = customerService.updateCustomer(id, customerDto);
 
