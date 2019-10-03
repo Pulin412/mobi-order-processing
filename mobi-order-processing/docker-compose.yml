@@ -1,0 +1,72 @@
+version: "2.2"
+
+networks:
+  mobi-order-processing:
+    external:
+      name: mobi-order-processing
+
+services:
+  discovery-server:
+    restart: always
+    mem_limit: 512m
+    build: mobi-discovery-server/.
+    image: discovery-server
+    container_name: discovery-server
+    ports:
+      - 8761:8761
+    networks:
+      - mobi-order-processing
+
+  inventory-service:
+    restart: always
+    mem_limit: 512m
+    build: mobi-inventory-service/.
+    image: inventory-service
+    container_name: inventory-service
+    depends_on:
+      - discovery-server
+    ports:
+      - 8081:8081
+    networks:
+      - mobi-order-processing
+
+#  customer-service:
+#    restart: always
+#    mem_limit: 512m
+#    build: mobi-customer-service/.
+#    image: customer-service
+#    container_name: customer-service
+#    depends_on:
+#      - discovery-server
+#    ports:
+#      - 8083:8083
+#    networks:
+#      - mobi-order-processing
+
+  postgres:
+    image: postgres
+    hostname: postgres
+    container_name: postgres
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_USER=root
+      - POSTGRES_DB=testdb
+    ports:
+      - 5432:5432
+    volumes:
+      - /var/lib/postgresql/data
+    networks:
+      - mobi-order-processing
+
+
+  #  employee-service:
+  #    restart: always
+  #    mem_limit: 512m
+  #    build: employee-service/.
+  #    image: employee-service
+  #    container_name: employee-service
+  #    depends_on:
+  #      - eureka-server
+  #    ports:
+  #      - 8011:8011
+
