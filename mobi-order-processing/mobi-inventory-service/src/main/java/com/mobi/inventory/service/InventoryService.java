@@ -179,7 +179,9 @@ public class InventoryService {
     private List<Product> productDtoListToProductList(List<ProductDto> productDtoList) {
         List<Product> productList = new ArrayList<>();
         for (ProductDto productDto : productDtoList) {
-            productList.add(convertToEntity(productDto));
+            Product product = convertToEntity(productDto);
+            productList.add(product);
+
         }
         return productList;
     }
