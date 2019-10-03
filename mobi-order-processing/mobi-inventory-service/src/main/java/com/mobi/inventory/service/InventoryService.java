@@ -35,9 +35,9 @@ public class InventoryService {
      * @param productId the product id
      * @return the product by id
      */
-    public ResponseDto getProductById(String productId) {
+    public ResponseDto getProductById(Long productId) {
         logger.info("Entered into getProductById with {}", productId);
-        Optional<Product> product = inventoryRepository.findById(Long.valueOf(productId));
+        Optional<Product> product = inventoryRepository.findById(productId);
         ResponseDto responseDto = new ResponseDto("", HttpStatus.OK.toString(), null);
         if (product.isPresent()) {
             List<Product> productList = new ArrayList<>();
@@ -102,9 +102,9 @@ public class InventoryService {
      * @param id the id
      * @return the response dto
      */
-    public ResponseDto removeProduct(String id) {
+    public ResponseDto removeProduct(Long id) {
         logger.info("Entered into removeProduct");
-        Optional<Product> product = inventoryRepository.findById(Long.valueOf(id));
+        Optional<Product> product = inventoryRepository.findById(id);
         ResponseDto responseDto = new ResponseDto("", HttpStatus.OK.toString(), null);
         if (product.isPresent()) {
             inventoryRepository.delete(product.get());
