@@ -14,7 +14,7 @@ public class SwaggerConfig {
     @Bean
     public Docket productApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .select()                 .apis(RequestHandlerSelectors.basePackage("com.mobi.customer.MobiCustomerService.Controller"))
+                .select().apis(RequestHandlerSelectors.basePackage("com.mobi.customer.MobiCustomerService.Controller"))
                 .paths(PathSelectors.regex("/.*"))
                 .build();
     }
