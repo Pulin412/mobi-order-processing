@@ -15,12 +15,6 @@
     </properties>
 
     <dependencies>
-<!--        <dependency>-->
-<!--            <groupId>com.mobi.demo</groupId>-->
-<!--            <artifactId>mobi-inventory-service</artifactId>-->
-<!--            <version>{project.version}</version>-->
-<!--            <scope>compile</scope>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
