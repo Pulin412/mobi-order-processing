@@ -16,6 +16,19 @@ services:
     networks:
       - mobi-order-processing
 
+  api-gateway:
+    restart: always
+    mem_limit: 512m
+    build: api-gateway/.
+    image: api-gateway
+    container_name: api-gateway
+    depends_on:
+      - discovery-server
+    ports:
+      - 8010:8010
+    networks:
+      - mobi-order-processing
+
   inventory-service:
     restart: always
     build: mobi-inventory-service/.
