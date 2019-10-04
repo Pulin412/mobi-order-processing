@@ -2,12 +2,12 @@ package com.mobi.customer.MobiCustomerService;
 
 import com.mobi.customer.MobiCustomerService.entity.Customer;
 import com.mobi.customer.MobiCustomerService.exception.RecordNotFoundException;
-import com.mobi.customer.MobiCustomerService.model.CustomerDto;
 import com.mobi.customer.MobiCustomerService.model.ResponseDto;
 import com.mobi.customer.MobiCustomerService.repository.CustomerRepository;
 import com.mobi.customer.MobiCustomerService.service.CustomerService;
 import com.mobi.customer.MobiCustomerService.util.CustomerServiceConstants;
 import com.mobi.customer.MobiCustomerService.util.CustomerServiceUtil;
+import com.mobi.demo.CustomerDto;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,7 +1,7 @@
 package com.mobi.customer.MobiCustomerService.util;
 
 import com.mobi.customer.MobiCustomerService.entity.Customer;
-import com.mobi.customer.MobiCustomerService.model.CustomerDto;
+import com.mobi.demo.CustomerDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

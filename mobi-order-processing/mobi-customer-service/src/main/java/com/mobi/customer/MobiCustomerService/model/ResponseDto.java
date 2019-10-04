@@ -1,6 +1,7 @@
 package com.mobi.customer.MobiCustomerService.model;
 
 
+import com.mobi.demo.CustomerDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

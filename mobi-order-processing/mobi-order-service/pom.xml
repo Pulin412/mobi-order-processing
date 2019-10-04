@@ -75,8 +75,9 @@
         </dependency>
         <dependency>
             <groupId>com.mobi.demo</groupId>
-            <artifactId>mobi-inventory-service</artifactId>
+            <artifactId>common-lib</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

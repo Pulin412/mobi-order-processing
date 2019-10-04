@@ -1,6 +1,6 @@
 package com.mobi.order.mobiOrderService.controller;
 
-import com.mobi.inventory.dto.ProductDto;
+import com.mobi.demo.ProductDto;
 import com.mobi.order.mobiOrderService.dto.ResponseDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;

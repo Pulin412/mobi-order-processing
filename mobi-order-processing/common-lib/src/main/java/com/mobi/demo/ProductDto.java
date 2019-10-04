@@ -1,4 +1,4 @@
-package com.mobi.inventory.dto;
+package com.mobi.demo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

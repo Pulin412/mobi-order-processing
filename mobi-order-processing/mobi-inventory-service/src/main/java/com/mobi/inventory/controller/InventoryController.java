@@ -1,6 +1,6 @@
 package com.mobi.inventory.controller;
 
-import com.mobi.inventory.dto.ProductDto;
+import com.mobi.demo.ProductDto;
 import com.mobi.inventory.dto.ResponseDto;
 import com.mobi.inventory.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;

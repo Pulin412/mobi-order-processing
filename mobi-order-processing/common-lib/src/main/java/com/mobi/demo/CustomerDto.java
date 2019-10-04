@@ -1,4 +1,4 @@
-package com.mobi.customer.MobiCustomerService.model;
+package com.mobi.demo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

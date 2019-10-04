@@ -1,6 +1,6 @@
 package com.mobi.inventory.service;
 
-import com.mobi.inventory.dto.ProductDto;
+import com.mobi.demo.ProductDto;
 import com.mobi.inventory.dto.ResponseDto;
 import com.mobi.inventory.entity.Product;
 import com.mobi.inventory.repository.InventoryRepository;
