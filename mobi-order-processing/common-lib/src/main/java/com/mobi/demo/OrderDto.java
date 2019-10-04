@@ -1,4 +1,4 @@
-package com.mobi.order.mobiOrderService.dto;
+package com.mobi.demo;
 
 
 import lombok.Data;

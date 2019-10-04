@@ -1,10 +1,10 @@
 package com.mobi.customer.MobiCustomerService.Controller;
 
 import com.mobi.customer.MobiCustomerService.exception.RecordNotFoundException;
-import com.mobi.customer.MobiCustomerService.model.CustomerDto;
 import com.mobi.customer.MobiCustomerService.model.ResponseDto;
 import com.mobi.customer.MobiCustomerService.service.CustomerService;
 
+import com.mobi.demo.CustomerDto;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;

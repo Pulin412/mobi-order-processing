@@ -1,7 +1,7 @@
 package com.mobi.order.mobiOrderService.controller;
 
 
-import com.mobi.order.mobiOrderService.dto.OrderDto;
+import com.mobi.demo.OrderDto;
 import com.mobi.order.mobiOrderService.dto.OrderResponseDto;
 import com.mobi.order.mobiOrderService.entities.OrderDetails;
 import com.mobi.order.mobiOrderService.repository.OrderRepository;

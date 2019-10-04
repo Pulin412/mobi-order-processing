@@ -1,15 +1,13 @@
 package com.mobi.inventory.unittest.servicelayer;
 
-import com.mobi.inventory.dto.ProductDto;
+import com.mobi.demo.ProductDto;
 import com.mobi.inventory.dto.ResponseDto;
 import com.mobi.inventory.entity.Product;
 import com.mobi.inventory.repository.InventoryRepository;
 import com.mobi.inventory.service.InventoryService;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.*;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.modelmapper.ModelMapper;
 
 import java.util.ArrayList;
@@ -17,7 +15,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 //@RunWith(MockitoJUnitRunner.class)

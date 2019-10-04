@@ -1,9 +1,9 @@
 package com.mobi.inventory.unittest.controllerlayer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mobi.demo.ProductDto;
 import com.mobi.inventory.MobiInventoryServiceApplication;
 import com.mobi.inventory.controller.InventoryController;
-import com.mobi.inventory.dto.ProductDto;
 import com.mobi.inventory.dto.ResponseDto;
 import com.mobi.inventory.entity.Product;
 import com.mobi.inventory.service.InventoryService;

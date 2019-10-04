@@ -11,6 +11,5 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 public class MobiOrderServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(MobiOrderServiceApplication.class, args);
-
     }
 }

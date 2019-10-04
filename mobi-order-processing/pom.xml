@@ -20,6 +20,7 @@
 		<module>mobi-inventory-service</module>
 		<module>mobi-order-service</module>
 		<module>mobi-discovery-server</module>
+        <module>common-lib</module>
     </modules>
 
 	<properties>

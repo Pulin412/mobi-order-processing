@@ -48,7 +48,6 @@ services:
       depends_on:
         - discovery-server
         - inventory-service
-        - customer-service
       ports:
         - 8082:8082
       networks:
@@ -68,16 +67,4 @@ services:
       - /var/lib/postgresql/data
     networks:
       - mobi-order-processing
-
-
-  #  employee-service:
-  #    restart: always
-  #    mem_limit: 512m
-  #    build: employee-service/.
-  #    image: employee-service
-  #    container_name: employee-service
-  #    depends_on:
-  #      - eureka-server
-  #    ports:
-  #      - 8011:8011
 

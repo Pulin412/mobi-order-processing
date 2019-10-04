@@ -1,7 +1,7 @@
 package com.mobi.inventory.integrationtest;
 
+import com.mobi.demo.ProductDto;
 import com.mobi.inventory.MobiInventoryServiceApplication;
-import com.mobi.inventory.dto.ProductDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
