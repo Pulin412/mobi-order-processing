@@ -41,17 +41,17 @@ services:
       - mobi-order-processing
 
   order-service:
-      restart: always
-      build: mobi-order-service/.
-      image: order-service
-      container_name: order-service
-      depends_on:
-        - discovery-server
-        - inventory-service
-      ports:
-        - 8082:8082
-      networks:
-        - mobi-order-processing
+    restart: always
+    build: mobi-order-service/.
+    image: order-service
+    container_name: order-service
+    depends_on:
+      - discovery-server
+      - inventory-service
+    ports:
+      - 8082:8082
+    networks:
+      - mobi-order-processing
 
   postgres:
     image: postgres
@@ -64,7 +64,9 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - /var/lib/postgresql/data
+      - postgres-db:/var/lib/postgresql/data
     networks:
       - mobi-order-processing
 
+volumes:
+  postgres-db:
