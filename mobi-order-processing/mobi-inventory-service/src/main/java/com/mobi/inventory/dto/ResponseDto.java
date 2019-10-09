@@ -1,5 +1,6 @@
 package com.mobi.inventory.dto;
 
+import com.mobi.demo.ProductDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

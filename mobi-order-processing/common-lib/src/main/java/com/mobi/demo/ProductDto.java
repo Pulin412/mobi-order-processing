@@ -1,11 +1,15 @@
-package com.mobi.inventory.dto;
+package com.mobi.demo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * The type Product dto.
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProductDto {
 
     /**

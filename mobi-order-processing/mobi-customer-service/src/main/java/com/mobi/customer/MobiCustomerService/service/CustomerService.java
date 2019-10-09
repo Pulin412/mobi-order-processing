@@ -5,12 +5,12 @@ import com.mobi.customer.MobiCustomerService.util.CustomerServiceConstants;
 
 import com.mobi.customer.MobiCustomerService.entity.Customer;
 import com.mobi.customer.MobiCustomerService.exception.RecordNotFoundException;
-import com.mobi.customer.MobiCustomerService.model.CustomerDto;
 import com.mobi.customer.MobiCustomerService.model.ResponseDto;
 import com.mobi.customer.MobiCustomerService.repository.CustomerRepository;
 
 
 import com.mobi.customer.MobiCustomerService.util.CustomerServiceUtil;
+import com.mobi.demo.CustomerDto;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -34,6 +34,8 @@ public class CustomerService {
   String responseMsg = "";
 
   public ResponseDto getAllCustomers() {
+
+      log.info("Reading through Service class");
     List<Customer> customerList = customerRepository.findAll();
     responseMsg = CustomerServiceConstants.CUSTOMER_LIST;
     ResponseDto responseDto = new ResponseDto("", HttpStatus.OK.toString(), null);
@@ -67,8 +69,10 @@ public class CustomerService {
 
   public ResponseDto createCustomer(CustomerDto customerDto) throws RecordNotFoundException {
     List<CustomerDto> customerDtoList = new ArrayList<>();
-    Customer customer = new Customer();
-    customerRepository.save(customerServiceUtil.convertToEntity(customerDto));
+
+    Customer customer;
+    customer = customerRepository.save(customerServiceUtil.convertToEntity(customerDto));
+
     customerDtoList.add(customerServiceUtil.convertToDto(customer));
     log.debug("CustomerService : creating new customer : {}");
     return new ResponseDto(
@@ -83,7 +87,9 @@ public class CustomerService {
       Customer customer = customerOptional.get();
       customerRepository.save(customerServiceUtil.convertToEntity(customerDto));
       customerDtoList.add(customerServiceUtil.convertToDto(customer));
-      responseDto.setMessage(CustomerServiceConstants.CUSTOMER_CREATED);
+
+      responseDto.setMessage(CustomerServiceConstants.CUSTOMER_RECORDS_UPDATED);
+
       responseDto.setCustomerDtoList(customerDtoList);
     } else {
       responseDto.setMessage(CustomerServiceConstants.NO_RECORDS_FOUND);

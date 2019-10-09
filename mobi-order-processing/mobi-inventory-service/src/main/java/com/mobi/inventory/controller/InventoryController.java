@@ -1,10 +1,9 @@
 package com.mobi.inventory.controller;
 
-import com.mobi.inventory.dto.ProductDto;
+import com.mobi.demo.ProductDto;
 import com.mobi.inventory.dto.ResponseDto;
 import com.mobi.inventory.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,7 +35,7 @@ public class InventoryController {
      * @return the response dto
      */
     @GetMapping(value = "/product/{id}")
-    public ResponseDto findById(@PathVariable String id) {
+    public ResponseDto findById(@PathVariable Long id) {
         return inventoryService.getProductById(id);
     }
 
@@ -46,7 +45,7 @@ public class InventoryController {
      * @param name the name
      * @return the response dto
      */
-    @GetMapping(value = "/products/{name}")
+    @GetMapping(value = "/productByName/{name}")
     public ResponseDto findByName(@PathVariable String name) {
         return inventoryService.getProductByName(name);
     }
@@ -69,7 +68,7 @@ public class InventoryController {
      * @return the response dto
      */
     @DeleteMapping("/{id}")
-    public ResponseDto removeProduct(@PathVariable String id) {
+    public ResponseDto removeProduct(@PathVariable Long id) {
         return inventoryService.removeProduct(id);
     }
 

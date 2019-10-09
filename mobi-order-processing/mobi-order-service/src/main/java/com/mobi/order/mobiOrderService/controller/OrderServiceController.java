@@ -1,7 +1,7 @@
 package com.mobi.order.mobiOrderService.controller;
 
 
-import com.mobi.order.mobiOrderService.dto.OrderDto;
+import com.mobi.demo.OrderDto;
 import com.mobi.order.mobiOrderService.dto.OrderResponseDto;
 import com.mobi.order.mobiOrderService.entities.OrderDetails;
 import com.mobi.order.mobiOrderService.repository.OrderRepository;
@@ -29,7 +29,7 @@ public class OrderServiceController {
 
     @ApiOperation("this is the end point to get an order from the records ")
     @GetMapping("/{orderId}")
-    public OrderDetails getOrder(@PathVariable Long orderId) {
+    public OrderDetails getOrder(@PathVariable Long orderId) throws InterruptedException  {
         return orderService.getOrder(orderId);
     }
 

@@ -1,8 +1,8 @@
 package com.mobi.order.mobiOrderService.services;
 
-import com.mobi.inventory.dto.ProductDto;
+import com.mobi.demo.ProductDto;
 import com.mobi.order.mobiOrderService.controller.ProductClient;
-import com.mobi.order.mobiOrderService.dto.OrderDto;
+import com.mobi.demo.OrderDto;
 import com.mobi.order.mobiOrderService.dto.OrderResponseDto;
 import com.mobi.order.mobiOrderService.dto.ResponseDto;
 import com.mobi.order.mobiOrderService.entities.OrderDetails;

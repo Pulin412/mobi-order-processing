@@ -16,11 +16,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.mobi.demo</groupId>
-            <artifactId>mobi-inventory-service</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
@@ -72,6 +67,12 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.mobi.demo</groupId>
+            <artifactId>common-lib</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -85,4 +86,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+
+
 </project>

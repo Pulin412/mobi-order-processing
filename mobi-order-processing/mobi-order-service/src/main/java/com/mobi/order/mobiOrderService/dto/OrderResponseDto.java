@@ -1,5 +1,6 @@
 package com.mobi.order.mobiOrderService.dto;
 
+import com.mobi.demo.OrderDto;
 import com.mobi.order.mobiOrderService.util.OrderStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
