@@ -1,4 +1,25 @@
-spring:
-  profiles:
-    active:
-      - "dev"
+server:
+  port: 8010
+
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://discovery-server:8761/eureka/
+
+zuul:
+  ignoredServices: "*"
+  routes:
+    customer-service:
+      path: /customer-service/**
+      serviceId: CUSTOMER-SERVICE
+      stripPrefix: true
+    inventory-service:
+      path: /inventory-service/**
+      serviceId: INVENTORY-SERVICE
+      stripPrefix: true
+    order-service:
+      path: /order-service/**
+      serviceId: ORDER-SERVICE
+      stripPrefix: true
