@@ -1,20 +1,15 @@
 package com.mobi.customer.MobiCustomerService.service;
 
-
-import com.mobi.customer.MobiCustomerService.util.CustomerServiceConstants;
-
 import com.mobi.customer.MobiCustomerService.entity.Customer;
 import com.mobi.customer.MobiCustomerService.exception.RecordNotFoundException;
 import com.mobi.customer.MobiCustomerService.model.ResponseDto;
 import com.mobi.customer.MobiCustomerService.repository.CustomerRepository;
-
-
+import com.mobi.customer.MobiCustomerService.util.CustomerServiceConstants;
 import com.mobi.customer.MobiCustomerService.util.CustomerServiceUtil;
 import com.mobi.demo.CustomerDto;
 import lombok.extern.slf4j.Slf4j;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +21,6 @@ import java.util.Optional;
 @Service
 public class CustomerService {
 
-
   @Autowired CustomerRepository customerRepository;
 
   @Autowired CustomerServiceUtil customerServiceUtil;
@@ -35,7 +29,7 @@ public class CustomerService {
 
   public ResponseDto getAllCustomers() {
 
-      log.info("Reading through Service class");
+    log.info("Reading through Service class");
     List<Customer> customerList = customerRepository.findAll();
     responseMsg = CustomerServiceConstants.CUSTOMER_LIST;
     ResponseDto responseDto = new ResponseDto("", HttpStatus.OK.toString(), null);
@@ -51,6 +45,7 @@ public class CustomerService {
     return responseDto;
   }
 
+  @Cacheable(value = "usersCache",key ="#id")
   public ResponseDto getCustomerById(Long id) {
     Optional<Customer> optionalCustomer = customerRepository.findById(id);
     ResponseDto responseDto = new ResponseDto("", HttpStatus.OK.toString(), null);
@@ -67,6 +62,7 @@ public class CustomerService {
     return responseDto;
   }
 
+  @Cacheable(value = "usersCache",key ="#id")
   public ResponseDto createCustomer(CustomerDto customerDto) throws RecordNotFoundException {
     List<CustomerDto> customerDtoList = new ArrayList<>();
 
@@ -79,6 +75,7 @@ public class CustomerService {
         "New customer created Successfully", HttpStatus.OK.toString(), customerDtoList);
   }
 
+  @Cacheable(value = "usersCache",key ="#updateRecord")
   public ResponseDto updateCustomer(Long id, CustomerDto customerDto) {
     Optional<Customer> customerOptional = customerRepository.findById(id);
     ResponseDto responseDto = new ResponseDto("", HttpStatus.OK.toString(), null);
@@ -97,6 +94,7 @@ public class CustomerService {
     return responseDto;
   }
 
+  @Cacheable(value = "usersCache",key ="#id")
   public ResponseDto deleteCustomerById(Long id) throws RecordNotFoundException {
     Optional<Customer> customerOptional = customerRepository.findById(id);
     List<CustomerDto> customerDtoList = new ArrayList<>();
